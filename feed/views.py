@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .modles import Article Comment HashTag
+from django.http import HttpRequestRedirect
 
 # Create your views here.
 def index(request):
@@ -14,8 +15,8 @@ def index(request):
     elif:
         article_list = Article.objects.filter(category=category)
     else:
-        article_list = Article.object.filter(hashtag=hashtag)
-        
+        article_list = Article.object.filter(hashtag__name=hashtag)
+
 
     # Case 1
     # category_list = set([])
@@ -45,13 +46,31 @@ def index(request):
     # # pass 는 이도적으로 구현하지 않음을 표시하는 명령어
     # pass
 
-def detail(request):
-    article = Article.objects.get(id=article)
-    hashtag_list = HashTag.objects.all
-    ctx {
-        "article" : article,
-        "hashtag_list" : hashtag_list,
-    }
+def detail(request, article_id):
+    # GET & POST
+    if request.method == "GET":
+        article = Article.objects.get(id=article)
+        # comment_list = Comment.objects.filter(article__id=article_id)
+        # comment_list = article.article_comments.all()
+        hashtag_list = HashTag.objects.all
+        ctx {
+            "article" : article,
+            # "comment_list" : comment_list,
+            "hashtag_list" : hashtag_list,
+        }
+    elif request.method == "POST":
+        username = request.POST.get("username")
+        content = request.POST.get("content")
+        # print(username)
+        # print(content)
+
+        Comment.object.create(
+            article=article,
+            username=username,
+            content=content,
+        )
+        return HttpRequestRedirect("/{}/".format(article_id))
+
     return render(request, "detail.html")
 
 # def about(request):

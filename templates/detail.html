@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block body %}
+{% include "navbar.html" %}
+
+<div class="container">
+  <div class="blog-header">
+    <h1 class="blog_title">{{ article.title }}</h1>
+    <p class="lead blog-description">The first blog created by Imagineer</p>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-8">
+      <p>{{ article.content }}</p>
+    </div>
+
+    <!-- 백엔드 소스 추가 가능  -->
+    <div>
+      {% for comment in article.article_comments.all %}
+        <div>{{ comment.username }} : {{ comment.content }}</div>
+      {% endfor %}
+    </div>
+
+    <!-- 댓글 입력  -->
+    <div class="">
+      <form class="" action="" method="post">
+
+        <!-- 장고에서 form 처리 시 보안기능 추가  -->
+        <!-- 항상 같은 사용  -->
+        {% csrf_token %}
+
+        <input type="text" name="username" value="" />
+        <input type="text" name="content" value="" />
+        <button type="submit" name="button">댓글 달기</button>
+      </form>
+
+    </div>
+  </div>
+
+  <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+    <div class="siderbar-module">
+      <h4>HashTag</h4>
+      <ol>
+        {% for hashtag in hashtag_list %}
+        <li>#{{ hashtag }}</li>
+        {% endfor %}
+      </ol>
+    </div>
+
+    <div class="sidebar-module">
+    </div>
+  </div>
+
+</div>
+{% endblock %}
