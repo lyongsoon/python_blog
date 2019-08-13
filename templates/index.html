@@ -36,17 +36,26 @@
     </div>
 
     <!-- 화면의 4할  -->
-    <div class="col-sm-3" col-sm-offset-1 blog-sidebar>
+    <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+      <div class="sidebar-module">
+        <h4>Categories</h4>
+        <ol class="list-unstyle">
+          <li><a href="/?category={{ alias }}">{{ category }}</a></li>
+          {% for alias, category in category_list %}
+          <li><a href="/?category={{ alias }}">{{ category }}</a></li>
+          {% endfor %}
+        </ol>
+      </div>
+
       <div class="sidebar-module">
         <h4>Hashtages</h4>
         <ol class="list-unstyle">
           {% for hashtag in hashtag_list %}
-          <li>#{{ hashtag.name}}</li>
+          <!-- <li>#{{ hashtag}}</li> -->
+          <li><a href="/?hashtag={{ hashtag.name }}">#{{ hasthtag }}</a></li>
           {% endfor %}
         </ol>
       </div>
-      <!-- <div class="sidebar-module">
-      </div> -->
     </div>
   </div>
 </div>

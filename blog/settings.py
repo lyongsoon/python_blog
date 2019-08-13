@@ -38,8 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # 1----------------------------------------------------------
+    # Start of Appending at 20190808
     # my apps
     'feed'
+    #  End of Appending at 20190808
+    #  ----------------------------------------------------------
 ]
 
 MIDDLEWARE = [
@@ -58,7 +62,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-        # ----------------------------------------------------------
+        # 2----------------------------------------------------------
         # Start of Appending at 20190808
         #  templates 폴더를 위한 세팅
             os.path.join(BASE_DIR, "templates"),
@@ -127,8 +131,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+# 3----------------------------------------------------------
+# Start of Appending at 20190808
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     # '/var/www/static/',
 ]
+#  End of Appending at 20190808
+#  ----------------------------------------------------------
